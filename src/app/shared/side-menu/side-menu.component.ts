@@ -11,7 +11,7 @@ export class SideMenuComponent {
   templateMenu: MenuItem[] = [
     {
       texto: 'Básicos',
-      ruta: 'template/basicos'
+      ruta: 'template/basicos',
     },
     {
       texto: 'Dinámicos',
