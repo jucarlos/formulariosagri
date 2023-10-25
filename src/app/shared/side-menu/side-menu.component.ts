@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MenuItem } from '../interfaces/interfaces';
 
 @Component({
@@ -8,6 +8,7 @@ import { MenuItem } from '../interfaces/interfaces';
 })
 export class SideMenuComponent {
 
+  
   templateMenu: MenuItem[] = [
     {
       texto: 'Básicos',

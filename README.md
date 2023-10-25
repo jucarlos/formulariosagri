@@ -10,3 +10,6 @@ Aplicación modularizada.
 - Validadores.
 - Selectores dependientes ( rxjs - validaciones asincronas ).
 
+Los selectores los haremos con la api de:
+ https://restcountries.com/
+
