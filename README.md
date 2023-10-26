@@ -13,3 +13,5 @@ Aplicación modularizada.
 Los selectores los haremos con la api de:
  https://restcountries.com/
 
+
+Un cambio para lo que haremos en la segunda jornada
