@@ -1,1 +1,152 @@
-<p>dinamicos works!</p>
+<h4>Reactive: Dinámicos</h4>
+<hr>
+
+
+<form>
+
+    <!-- Nombre -->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+
+            <input class="form-control"
+                placeholder="Introduce el nombre">
+
+                <span 
+                *ngIf="campoNoEsValido('nombre')"
+                class="form-text text-danger">
+                {{  getMsgError('nombre')   }}
+            </span>
+
+        </div>
+    </div>
+
+
+    <!-- Agregar un favorito -->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Agregar</label>
+        
+        <div class="col-sm-9">
+            <div class="input-group">
+
+                <input 
+                    class="form-control"
+                    placeholder="Agregar favorito"
+                     >
+                <button 
+                    type="button"
+                    
+                    class="btn btn-outline-primary">
+                    Agregar
+                </button>
+            </div>
+           
+        </div>
+
+    </div>
+
+
+
+    <!-- Listado -->
+
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Listado</label>
+        
+        <div class="col-sm-9">
+
+
+            <div class="mb-1">
+                <div class="input-group mb-1"  >
+
+                    <input class="form-control" >
+                    <button 
+                        type="button"
+                        class="btn btn-outline-danger">
+                        Eliminar
+                    </button>
+                </div>
+                <span class="form-text text-danger">
+                    Campo no válido
+                </span>
+
+            </div>
+
+
+
+            <div class="mb-1">
+                <div class="input-group mb-1"  >
+
+                    <input class="form-control" >
+                    <button 
+                        type="button"
+                        class="btn btn-outline-danger">
+                        Eliminar
+                    </button>
+                </div>
+                <span class="form-text text-danger">
+                    Campo no válido
+                </span>
+
+            </div>
+
+
+
+            <div class="mb-1">
+                <div class="input-group mb-1"  >
+
+                    <input class="form-control" >
+                    <button 
+                        type="button"
+                        class="btn btn-outline-danger">
+                        Eliminar
+                    </button>
+                </div>
+                <span class="form-text text-danger">
+                    Campo no válido
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+    <!-- Boton. -->
+
+
+    <div class="row mb-3">
+        <div class="col">
+            <button 
+            type="button"
+            class="btn btn-primary float-end">Guardar</button>
+        </div>
+    </div>
+
+
+</form>
+
+
+
+
+
+
+
+<div class="row">
+    <div class="col">
+        <span>Valid</span>
+        <pre>{{ miFormulario.valid }}</pre>
+
+        <span>Value</span>
+        <pre>{{ miFormulario.value | json  }}</pre>
+
+
+    </div>
+</div>
