@@ -2,7 +2,9 @@
 <h4>Template: Dinámicos</h4>
 <hr>
 
-<form autocomplete="off">
+<form autocomplete="off" 
+        #miFormulario="ngForm" 
+       >
 
     <!-- Nombre -->
 
@@ -11,9 +13,15 @@
         <div class="col-sm-9">
             <input class="form-control"
                 placeholder="Nombre"
-                name="nombre">
+                name="nombre"
+                [(ngModel)]="persona.nombre"
+                required
+                minlength="3"
+                >
 
-            <span class="form-text text-danger">
+            <span *ngIf="miFormulario.controls['nombre']?.errors
+                     && miFormulario.controls['nombre'].touched"
+                class="form-text text-danger">
                 El nombre es obligatorio
             </span>
         </div>
@@ -27,11 +35,17 @@
         <div class="col-sm-9">
             <div class="input-group">
 
-                <input class="form-control"
+                <input 
+                    class="form-control"
                     placeholder="Agregar favorito"
-                    name="nuevoLenguaje"
+                    name="nuevoFavorito"
+                    [(ngModel)]="nuevoFavorito"
+                    (keyup.enter)="agregarFavorito()"
                 >
-                <button class="btn btn-outline-primary">
+                <button 
+                    type="button"
+                    (click)="agregarFavorito()"
+                    class="btn btn-outline-primary">
                     Agregar
                 </button>
             </div>
@@ -48,29 +62,24 @@
         <label class="col-sm-3 col-form-label">Listado</label>
         
         <div class="col-sm-9">
-            <div class="input-group mb-1">
+
+            <div class="input-group mb-1" 
+                *ngFor="let favorito of persona.favoritos; let i = index" >
 
                 <input class="form-control"
-                    name="nuevoLenguaje"
-                >
-                <button class="btn btn-outline-danger">
+                    name="leng{{ i }}"
+                    [(ngModel)]="favorito.nombre"
+                    required
+                    minlength="3"
+                    >
+                <button 
+                    type="button"
+                    (click)="eliminarFavorito(i)"
+                    class="btn btn-outline-danger">
                     Eliminar
                 </button>
             </div>
-
-
-            <div class="input-group mb-1">
-
-                <input class="form-control"
-                    name="nuevoLenguaje"
-                >
-                <button class="btn btn-outline-danger">
-                    Eliminar
-                </button>
-            </div>
-
-
-
+            
 
         </div>
 
@@ -82,10 +91,21 @@
 
     <div class="row mb-3">
         <div class="col">
-            <button class="btn btn-primary float-end">Guardar</button>
+            <button 
+            type="button"
+            (click)="guardar()"
+            [disabled]="miFormulario.invalid"
+            class="btn btn-primary float-end">Guardar</button>
         </div>
     </div>
 
 
 
 </form>
+
+
+<h2>Valid</h2>
+<pre>{{ miFormulario.valid }}</pre>
+
+<span>Persona</span>
+<pre>{{ persona | json }}</pre>

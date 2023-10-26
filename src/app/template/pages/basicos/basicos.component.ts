@@ -37,9 +37,8 @@ export class BasicosComponent {
       return; 
     }
 
-
-
     console.log( formu.value );
+    console.log( formu );
 
   }
 
