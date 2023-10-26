@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dinamicos-reactive',
@@ -10,12 +10,49 @@ export class DinamicosComponent {
 
 
   miFormulario = this.fb.group({
-
+    nombre: [ 'Carlos', [Validators.required, Validators.minLength( 2 ) ] ],
     
+    favoritos: this.fb.array([
+      ['Java', Validators.required ],
+      ['Sql', Validators.required ],
+    ], [ ] )
+  
   });
+
+  nuevoFavorito = this.fb.control('', Validators.required );
+
+
+  get favoritoArr() {
+    return this.miFormulario.controls['favoritos'] as FormArray;
+  }
 
 
   constructor( private readonly fb: FormBuilder ) {}
+
+
+  eliminarFavorito( index: number ) {
+
+    console.log( index );
+    
+
+  }
+
+
+
+  agregarFavorito() {
+
+
+    if ( this.nuevoFavorito.invalid ) return;
+
+    const nuevo = this.nuevoFavorito.value;
+
+    this.favoritoArr.push( this.fb.control( nuevo, Validators.required ));
+
+    this.nuevoFavorito.reset();
+
+
+
+  }
 
 
 
@@ -49,6 +86,12 @@ export class DinamicosComponent {
   campoNoEsValido( campo: string ): boolean | null | undefined {
     return this.miFormulario.get(campo)?.errors 
       && this.miFormulario.get(campo)?.touched;
+  }
+
+
+  esValidoenArray( formArray: FormArray, index: number ) {
+
+    return formArray.controls[index]?.errors && formArray.controls[index].touched;
   }
 
 }

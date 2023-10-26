@@ -2,7 +2,7 @@
 <hr>
 
 
-<form>
+<form autocomplete="off" [formGroup]="miFormulario">
 
     <!-- Nombre -->
     <div class="row mb-3">
@@ -10,13 +10,14 @@
         <div class="col-sm-9">
 
             <input class="form-control"
-                placeholder="Introduce el nombre">
-
+                placeholder="Introduce el nombre"
+                formControlName="nombre">
+                
                 <span 
-                *ngIf="campoNoEsValido('nombre')"
-                class="form-text text-danger">
-                {{  getMsgError('nombre')   }}
-            </span>
+                    *ngIf="campoNoEsValido('nombre')"
+                    class="form-text text-danger">
+                    {{  getMsgError('nombre')   }}
+               </span>
 
         </div>
     </div>
@@ -32,10 +33,12 @@
                 <input 
                     class="form-control"
                     placeholder="Agregar favorito"
+                    (keyup.enter)="agregarFavorito()"
+                    [formControl]="nuevoFavorito"
                      >
                 <button 
                     type="button"
-                    
+                    (click)="agregarFavorito()"
                     class="btn btn-outline-primary">
                     Agregar
                 </button>
@@ -53,20 +56,24 @@
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Listado</label>
         
-        <div class="col-sm-9">
+        <div class="col-sm-9" formArrayName="favoritos">
 
 
-            <div class="mb-1">
+            <div class="mb-1" *ngFor="let favorito of favoritoArr.controls; let i = index">
                 <div class="input-group mb-1"  >
 
-                    <input class="form-control" >
+                    <input class="form-control"  [formControlName]="i">
                     <button 
                         type="button"
-                        class="btn btn-outline-danger">
+                        class="btn btn-outline-danger"
+                        (click)="eliminarFavorito(i)"
+                        >
                         Eliminar
                     </button>
                 </div>
-                <span class="form-text text-danger">
+                <span 
+                    *ngIf="esValidoenArray(favoritoArr, i)"  
+                    class="form-text text-danger">
                     Campo no válido
                 </span>
 
@@ -74,39 +81,6 @@
 
 
 
-            <div class="mb-1">
-                <div class="input-group mb-1"  >
-
-                    <input class="form-control" >
-                    <button 
-                        type="button"
-                        class="btn btn-outline-danger">
-                        Eliminar
-                    </button>
-                </div>
-                <span class="form-text text-danger">
-                    Campo no válido
-                </span>
-
-            </div>
-
-
-
-            <div class="mb-1">
-                <div class="input-group mb-1"  >
-
-                    <input class="form-control" >
-                    <button 
-                        type="button"
-                        class="btn btn-outline-danger">
-                        Eliminar
-                    </button>
-                </div>
-                <span class="form-text text-danger">
-                    Campo no válido
-                </span>
-
-            </div>
 
 
         </div>
