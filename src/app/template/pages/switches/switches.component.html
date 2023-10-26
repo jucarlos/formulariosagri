@@ -1,1 +1,121 @@
-<p>switches works!</p>
+
+<h4>Template: Switches</h4>
+<hr>
+
+
+    <form #miFormulario="ngForm" (ngSubmit)="guardar(miFormulario)">
+
+        <!-- Radios -->
+
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Genero</label>
+            <div class="col-sm-9">
+
+                  <div class="form-check">
+                    <input class="form-check-input" 
+                        type="radio"
+                        value="M"
+                        name="radioGenero"
+                        [(ngModel)]="persona.genero"
+                        id="radioMasculinoId"
+                        required>
+                    <label class="form-check-label" for="radioMasculinoId">
+                      Masculino
+                    </label>
+                  </div>
+
+                  <div class="form-check">
+                    <input class="form-check-input" 
+                        type="radio"
+                        value="F"
+                        name="radioGenero" 
+                        [(ngModel)]="persona.genero"
+                        id="radioFemeninoId" 
+                        required>
+                    <label class="form-check-label" for="radioFemeninoId">
+                      Femenino
+                    </label>
+                  </div>
+
+
+            </div>
+        </div>
+
+
+
+        <!-- Switches -->
+
+
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Notificaciones</label>
+            <div class="col-sm-9 mt-2">
+                <div class="form-check form-switch">
+                    <input 
+                        class="form-check-input" 
+                        type="checkbox" role="switch" 
+                        id="switchNotificaciones"
+                        name="notificaciones"
+                        [(ngModel)]="persona.notificaciones"
+    
+                        >
+                    <label 
+                        class="form-check-label" 
+                        for="switchNotificaciones">
+                        Deseo recibir notificaciones
+                    </label>
+                  </div>
+            </div>
+        </div>
+
+
+
+        <!-- Check -->
+
+
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label"></label>
+
+            <div class="col-sm-9">
+                <div class="form-check">
+                    <input class="form-check-input" 
+                        type="checkbox" 
+                        value="" 
+                        id="checkTerminos"
+                        name="terminos"
+                        [(ngModel)]="terminosYCondiciones"
+                        required                        
+                        >
+                    <label class="form-check-label" 
+                        for="checkTerminos">
+                      Acepto los términos y condiciones.
+                    </label>
+                  </div>
+            </div>
+
+        </div>
+
+
+
+        <!-- Boton -->
+
+        <div class="row mb-3">
+            <div clas="col">
+                <button class="btn btn-primary float-end"
+                    [disabled]="miFormulario.invalid"
+                    >Guardar</button>
+            </div>
+        </div>
+
+
+    </form>
+
+
+
+    <h2 class="mt-5">Valor del Formulario</h2>
+    <pre>{{ miFormulario.value | json }}</pre>
+
+    <span>Valid</span>
+    <pre>{{ miFormulario.valid }}</pre>
+
+    <span>Persona</span>
+    <pre>{{ persona | json }}</pre>
