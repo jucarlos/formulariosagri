@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EmailValidatorService } from 'src/app/shared/services/email-validator.service';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
 
 @Component({
@@ -10,8 +11,9 @@ import { ValidatorService } from 'src/app/shared/services/validator.service';
 export class RegistroComponent {
 
   // Servicios
-  private fb = inject( FormBuilder );
-  private validatorService = inject ( ValidatorService );
+  private fb                    = inject( FormBuilder );
+  private validatorService      = inject ( ValidatorService );
+  private emailValidatorService = inject( EmailValidatorService );
 
 
   // Creando el formulario
@@ -27,20 +29,28 @@ export class RegistroComponent {
     ]  
       ],
 
-    email: [ 'carlos@correo.com' , [ Validators.required ]   ],
+    email: [
+      'correo@gmail.com' , 
+      [ Validators.required, Validators.pattern( this.validatorService.emailPattern) ] , 
+      [ this.emailValidatorService  ]
+    ],
 
-    username: [ '', [ 
+    username: [ 'toledoUser', [ 
       Validators.required,
       this.validatorService.noPuedeSerCarlos
     
     ]    ],
 
-    password1: [ '123456', [Validators.required, Validators.minLength(6)]   ],
+    password1: [ '', [ Validators.required, Validators.minLength(6)]   ],
 
-    password2: [ '123456', [ Validators.required, Validators.minLength(6 )]  ]
+    password2: [ '', [ Validators.required, Validators.minLength(6 )]  ]
 
 
-  });
+  } , {  validators: [ 
+                    this.validatorService.camposIguales('password1', 'password2')
+        ]  
+      }
+ );
 
 
 
