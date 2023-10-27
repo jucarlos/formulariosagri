@@ -31,8 +31,7 @@
     <li *ngFor="let item of authMenu"
         class="list-group-item"
         [routerLink]="[item.ruta]"
-        routerLinkActive="active"
-        >
+        routerLinkActive="active" >
         {{ item.texto }}
     </li>
 </ul>
@@ -42,7 +41,7 @@
 <ul class="list-group">
     <li class="list-group-item" 
         routerLink="selectores"
-    >
+        routerLinkActive="active" >
         Selectores
     </li>
 </ul>
