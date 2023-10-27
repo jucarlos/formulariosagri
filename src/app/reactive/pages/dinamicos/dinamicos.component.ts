@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -8,9 +8,11 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
 })
 export class DinamicosComponent {
 
+  // Otra forma de injectar servicios que no sea en el constructor.
+  private  fb = inject(FormBuilder);
 
   miFormulario = this.fb.group({
-    nombre: [ 'Carlos', [Validators.required, Validators.minLength( 2 ) ] ],
+    nombre: [ 'Carlos', [Validators.required, Validators.minLength( 2 ) ] , ],
     
     favoritos: this.fb.array([
       ['Java', Validators.required ],
@@ -27,12 +29,11 @@ export class DinamicosComponent {
   }
 
 
-  constructor( private readonly fb: FormBuilder ) {}
-
-
   eliminarFavorito( index: number ) {
 
-    console.log( index );
+   
+    this.favoritoArr.removeAt( index );
+
     
 
   }
