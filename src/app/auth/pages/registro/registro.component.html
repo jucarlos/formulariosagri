@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col">
-        <form autocomplete="off">
+        <form autocomplete="off"  [formGroup]="miFormulario" (ngSubmit)="guardar()">
 
             <!-- Nombre - validaciones normales -->
           <div class="row mb-3">
@@ -12,9 +12,12 @@
             <div class="col-sm-7">
                 <input type="text"
                     class="form-control"
-                    placeholder="Introduce el nombre">
+                    placeholder="Introduce el nombre"
+                    formControlName="nombre"
+                    >
 
-                <span class="form-text text-danger">
+                <span *ngIf="campoNoEsValido('nombre')"
+                    class="form-text text-danger">
                     El nombre es obligatorio
                 </span>
             </div>
@@ -28,9 +31,12 @@
                 <div class="col-sm-7">
                     <input type="text"
                         class="form-control"
-                        placeholder="Dni o Nie">
+                        placeholder="Dni o Nie"
+                        formControlName="identificador"
+                        >
     
-                    <span class="form-text text-danger">
+                    <span *ngIf="campoNoEsValido('identificador')"
+                        class="form-text text-danger">
                         El dni o nie es obligatorio y de 9 dígitos
                     </span>
                 </div>
@@ -43,7 +49,9 @@
                 <div class="col-sm-7">
                     <input type="text"
                         class="form-control"
-                        placeholder="email">
+                        placeholder="email"
+                        formControlName="email"
+                        >
     
                     <span class="form-text text-danger">
                         El email es obligatorio y válido.
@@ -57,9 +65,12 @@
                 <div class="col-sm-7">
                     <input type="text"
                         class="form-control"
-                        placeholder="Introduce tu userName">
+                        placeholder="Introduce tu userName"
+                        formControlName="username"
+                        >
     
-                    <span class="form-text text-danger">
+                    <span *ngIf="campoNoEsValido('username')"
+                        class="form-text text-danger">
                         El username es obligatorio y no puede ser carlos
                     </span>
                 </div>
@@ -71,7 +82,9 @@
                 <div class="col-sm-7">
                     <input type="password"
                         class="form-control"
-                        placeholder="Introduce tu contraseña">
+                        placeholder="Introduce tu contraseña"
+                        formControlName="password1"
+                        >
     
                     <span class="form-text text-danger">
                             Contraseña obligatoria
@@ -86,7 +99,9 @@
                 <div class="col-sm-7">
                     <input type="password"
                         class="form-control"
-                        placeholder="Repite la contraseña">
+                        placeholder="Repite la contraseña"
+                        formControlName="password2"
+                        >
     
                     <span class="form-text text-danger">
                             Contraseña obligatoria e igual 
@@ -106,3 +121,15 @@
         </form>
     </div>
 </div>
+
+<hr>
+
+<h5>Valid</h5>
+<pre>{{ miFormulario.valid }} </pre>
+
+<h5>userName</h5>
+<pre>{{ miFormulario.get('username')?.errors | json }}</pre>
+
+
+<h5>Identificador</h5>
+<pre>{{ miFormulario.get('identificador')?.errors | json }}</pre>
